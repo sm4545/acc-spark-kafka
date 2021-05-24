@@ -20,10 +20,10 @@ df1.createOrReplaceTempView("stockprice_table")
 # max_val = spark.sql("SELECT * FROM stockprice_table")
 # max_val.show()
 
-max_val = spark.sql("SELECT max(value), key FROM stockprice_table GROUP BY key")
+max_val = spark.sql("SELECT key, value FROM stockprice_table WHERE value IN (select max(value) FROM stockprice_table)")
 max_val.show()
 
-min_val = spark.sql("SELECT min(value), key FROM stockprice_table GROUP BY key")
+min_val = spark.sql("SELECT key, value FROM stockprice_table WHERE value IN (select min(value) FROM stockprice_table)")
 min_val.show()
 
 
