@@ -15,10 +15,10 @@ df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)
 
 df1.show()
 
-df1.createOrReplaceTempView("stockprice_table")
+# df1.createOrReplaceTempView("stockprice_table")
 
-max_val = spark.sql("SELECT * FROM stockprice_table")
-max_val.show()
+# max_val = spark.sql("SELECT * FROM stockprice_table")
+# max_val.show()
 
 # max_val = spark.sql("SELECT max(value), key FROM stockprice_table GROUP BY key")
 # max_val.show()
