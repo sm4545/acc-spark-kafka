@@ -15,13 +15,13 @@ df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)
 
 df1.show()
 
-df1.registerTempTable("stockprice_table")
+df1.createOrReplaceTempView("stockprice_table")
 
 max_val = spark.sql("SELECT max(value), key FROM stockprice_table GROUP BY key")
 max_val.show()
 
-min_val = spark.sql("SELECT min(value), key FROM stockprice_table GROUP BY key")
-min_val.show()
+# min_val = spark.sql("SELECT min(value), key FROM stockprice_table GROUP BY key")
+# min_val.show()
 
 
 
