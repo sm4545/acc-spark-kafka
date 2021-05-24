@@ -20,12 +20,14 @@ df1.createOrReplaceTempView("stockprice_table")
 # max_val = spark.sql("SELECT * FROM stockprice_table")
 # max_val.show()
 
-max_val = spark.sql("SELECT key, value FROM stockprice_table WHERE value IN (select max(value) FROM stockprice_table)")
+max_val = spark.sql("SELECT key as TIME, value as HIGHEST_PRICE FROM stockprice_table WHERE value IN (select max(value) FROM stockprice_table)")
 max_val.show()
 
-min_val = spark.sql("SELECT key, value FROM stockprice_table WHERE value IN (select min(value) FROM stockprice_table)")
+min_val = spark.sql("SELECT key as TIME, value as LOWEST_PRICE FROM stockprice_table WHERE value IN (select min(value) FROM stockprice_table)")
 min_val.show()
 
+std_val = spark.sql("SELECT STDEV(value) as STANDARD_DEVIATION FROM stockprice_table")
+std_val.show()
 
 
                      
