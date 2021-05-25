@@ -16,17 +16,15 @@ df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)
 df1.show()
 
 df1.createOrReplaceTempView("stockprice_table")
-
-# max_val = spark.sql("SELECT * FROM stockprice_table")
-# max_val.show()
-
 max_val = spark.sql("SELECT value as HIGHEST_PRICE_ON_18_MAY, key as TIME FROM stockprice_table WHERE value IN (select max(value) FROM stockprice_table)")
 max_val.show()
 
-min_val = spark.sql("SELECT value as LOWEST_PRICE_ON_18_MAY, key as TIME FROM stockprice_table WHERE value IN (select min(value) FROM stockprice_table)")
+df1.createOrReplaceTempView("stockprice_table2")
+min_val = spark.sql("SELECT value as LOWEST_PRICE_ON_18_MAY, key as TIME FROM stockprice_table2 WHERE value IN (select min(value) FROM stockprice_table2)")
 min_val.show()
 
-std_val = spark.sql("SELECT stddev(value) as STANDARD_DEVIATION FROM stockprice_table")
+df1.createOrReplaceTempView("stockprice_table3")
+std_val = spark.sql("SELECT stddev(value) as STANDARD_DEVIATION FROM stockprice_table3")
 std_val.show()
 
 
