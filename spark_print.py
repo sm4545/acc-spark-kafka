@@ -8,12 +8,13 @@ df = spark \
 .format("kafka") \
 .option("kafka.bootstrap.servers", "172.25.0.12:9092,172.25.0.13:9092") \
 .option("startingOffsets", "earliest") \
-.option("subscribe", "AAPL") \
+.option("subscribe", "AAPL1") \
 .load()
 
 df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)", "timestamp")
 
 df1.show()
+print("#########:",df1.count())
 
 df1.registerTempTable("stockprice_table")
 max_val = spark.sql("SELECT value as HIGHEST_PRICE_ON_18_MAY, key as TIME FROM stockprice_table WHERE value IN (select MAX(value) FROM stockprice_table)")
