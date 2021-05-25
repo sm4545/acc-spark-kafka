@@ -14,7 +14,6 @@ df = spark \
 df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)", "timestamp")
 
 df1.show()
-print("#########:",df1.count())
 
 df1.registerTempTable("stockprice_table")
 max_val = spark.sql("SELECT value as HIGHEST_PRICE_ON_18_MAY, key as TIME FROM stockprice_table WHERE value IN (select MAX(value) FROM stockprice_table)")
@@ -26,5 +25,6 @@ min_val.show()
 std_val = spark.sql("SELECT stddev(value) as STANDARD_DEVIATION FROM stockprice_table")
 std_val.show()
 
+print("#########:",df1.count())
 
                      
