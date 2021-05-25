@@ -24,7 +24,7 @@ response = requests.get(url)
 data = json.loads(response.content.decode('utf-8'))
 
 producer = KafkaProducer(bootstrap_servers='172.25.0.12:9092')
-topic_name = 'AAPL1'
+topic_name = 'AAPL2'
 
 
 from kafka.admin import KafkaAdminClient, NewTopic
