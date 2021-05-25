@@ -15,7 +15,8 @@ def assemble_url(base_url, stock, date, token):
      return base_url+stock+'/chart/date/'+date+'?token='+token
 
 
-date = datetime.today().strftime('%Y%m%d')
+# date = datetime.today().strftime('%Y%m%d')
+date = '20210518'
 stock = 'AAPL'
 
 url = assemble_url(base_url, stock, date, token)
