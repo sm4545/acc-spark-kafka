@@ -40,7 +40,11 @@ admin_client.create_topics(new_topics=topic_list, validate_only=False)
 
 
 #In this for loop, we publish stock prices to the topic
+rec_cnt = 0
 for d in data:
     key_bytes = bytes(d['minute'], encoding='utf-8')
     value_bytes = bytes(str(d['average']), encoding='utf-8')
     producer.send(stock, key=key_bytes, value=value_bytes)
+    rec_cnt += 1
+    
+print("######### recs written into kafka topic:",rec_cnt)
