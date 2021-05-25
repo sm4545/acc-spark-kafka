@@ -15,7 +15,7 @@ df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)
 
 df1.show()
 
-df1.createOrReplaceTempView("stockprice_table")
+df1.registerTempTable("stockprice_table")
 max_val = spark.sql("SELECT value as HIGHEST_PRICE_ON_18_MAY, key as TIME FROM stockprice_table WHERE value IN (select MAX(value) FROM stockprice_table)")
 max_val.show()
 
