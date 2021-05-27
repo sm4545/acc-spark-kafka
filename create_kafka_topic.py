@@ -25,7 +25,7 @@ response = requests.get(url)
 data = json.loads(response.content.decode('utf-8'))
 
 producer = KafkaProducer(bootstrap_servers='172.25.0.12:9092')
-topic_name = 'AAPL_TOPIC_8'
+topic_name = 'AAPL_TOPIC_9'
 
 
 from kafka.admin import KafkaAdminClient, NewTopic
@@ -45,5 +45,5 @@ for d in data:
     key_bytes = bytes(d['minute'], encoding='utf-8')
     value_bytes = bytes(str(d['average']), encoding='utf-8')
     producer.send(topic_name, key=key_bytes, value=value_bytes)
-
+    
     
