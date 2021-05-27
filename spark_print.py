@@ -8,11 +8,10 @@ df = spark \
 .format("kafka") \
 .option("kafka.bootstrap.servers", "172.25.0.12:9092,172.25.0.13:9092") \
 .option("startingOffsets", "earliest") \
-.option("subscribe", "AAPL_TOPIC_6") \
+.option("subscribe", "AAPL_TOPIC_7") \
 .load()
 
 df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)", "timestamp")
-
 df1.show()
 
 df1.registerTempTable("stockprice_table")
@@ -24,7 +23,4 @@ min_val.show()
 
 std_val = spark.sql("SELECT stddev(value) as STANDARD_DEVIATION FROM stockprice_table")
 std_val.show()
-
-print("#########:",df1.count())
-
-                     
+                   
