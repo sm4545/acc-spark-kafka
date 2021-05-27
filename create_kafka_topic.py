@@ -3,7 +3,6 @@ import json
 import requests
 from time import sleep
 from kafka import KafkaProducer
-import pandas as pd
 
 with open('token.json', 'r') as j:
     contents = json.loads(j.read())
