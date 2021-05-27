@@ -8,7 +8,7 @@ df = spark \
 .format("kafka") \
 .option("kafka.bootstrap.servers", "172.25.0.12:9092,172.25.0.13:9092") \
 .option("startingOffsets", "earliest") \
-.option("subscribe", "AAPL_TOPIC_8") \
+.option("subscribe", "AAPL_TOPIC_9") \
 .load()
 
 df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)", "timestamp")
