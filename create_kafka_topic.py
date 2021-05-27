@@ -3,6 +3,7 @@ import json
 import requests
 from time import sleep
 from kafka import KafkaProducer
+import pandas as pd
 
 with open('token.json', 'r') as j:
     contents = json.loads(j.read())
@@ -24,7 +25,7 @@ response = requests.get(url)
 data = json.loads(response.content.decode('utf-8'))
 
 producer = KafkaProducer(bootstrap_servers='172.25.0.12:9092')
-topic_name = 'AAPLSPM18'
+topic_name = 'AAPL_TOPIC_1'
 
 
 from kafka.admin import KafkaAdminClient, NewTopic
@@ -41,10 +42,17 @@ admin_client.create_topics(new_topics=topic_list, validate_only=False)
 
 #In this for loop, we publish stock prices to the topic
 rec_cnt = 0
+key_list = list()
+value_list = list()
+
 for d in data:
     key_bytes = bytes(d['minute'], encoding='utf-8')
     value_bytes = bytes(str(d['average']), encoding='utf-8')
     producer.send(stock, key=key_bytes, value=value_bytes)
     rec_cnt += 1
+    key_list.append(key_bytes)
+    value_list.append(value_bytes)
     
+producer_df = pd.DataFrame({'key':key_list, 'value':value_list})
+producer_df
 print("######### recs written into kafka topic:",rec_cnt)
