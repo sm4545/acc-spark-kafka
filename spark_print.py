@@ -12,6 +12,7 @@ df = spark \
 .load()
 
 df1 = df.selectExpr("CAST(key AS STRING)", "CAST(CAST(value AS STRING) AS FLOAT)", "timestamp")
+
 df1.show()
 
 df1.registerTempTable("stockprice_table")
