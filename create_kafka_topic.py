@@ -16,7 +16,7 @@ def assemble_url(base_url, stock, date, token):
 
 
 # date = datetime.today().strftime('%Y%m%d')
-date = '20210501'
+date = '20210503'
 stock = 'GME'
 
 url = assemble_url(base_url, stock, date, token)
@@ -24,7 +24,7 @@ response = requests.get(url)
 data = json.loads(response.content.decode('utf-8'))
 
 producer = KafkaProducer(bootstrap_servers='172.25.0.12:9092')
-topic_name = 'GME_TOPIC_1'
+topic_name = 'GME_TOPIC_2'
 
 
 from kafka.admin import KafkaAdminClient, NewTopic
